@@ -39,16 +39,25 @@ def check_path(path):
     return path
 
 
-def make_md5(fpath):
+def make_md5(file):
+
+    fn = file
+    fz = check_path(fn)
+    fmd5 = search_md5(fz)
+
+    print("%s\t%s" % (fmd5, fn))
+
+    return fmd5
+
+
+def make_dire_md5(fpath):
 
     for root, dirs, files in os.walk(fpath):
         if not files:
             continue
         for file in files:
-            file_name = os.path.join(root, file)
-            file = check_path(file_name)
-            file_md5 = search_md5(file)
-            print("%s\t%s" % (file_md5, file_name))
+            file = os.path.join(root, file)
+            fmd5 = make_md5(file)
 
     return 0
 
@@ -56,8 +65,13 @@ def make_md5(fpath):
 def make_md5s(fpaths):
 
     for i in fpaths:
-        make_md5(i)
-
+        if os.path.isdir(i): 
+            make_dire_md5(i)
+        elif os.path.isfile(i):
+            make_md5(i)
+        else:
+            LOG.info('%s is neither a file nor a directory' % i)
+  
     return 0
 
 
@@ -79,7 +93,8 @@ def main():
     description='''
 name:
     makemd5.py Generate MD5 values for files in the folder one by one
-
+source:
+    https://github.com/zxgsy520/biotool
 attention:
     makemd5.py ./ > result.md5
     makemd5.py genomic.fasta > result.md5
