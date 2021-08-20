@@ -80,7 +80,7 @@ def move_files(file_path, path, prefix, oprefix=""):
             if oprefix not in file:
                 nfile = file
             else:
-                nfile = file.replace(oprefix, prefix)
+                nfile = file.replace(oprefix, prefix, 1)
             file = "%s/%s" % (root, file)
             nfile = "%s/%s" % (nroot, nfile)
             copy_file(file, nfile)
