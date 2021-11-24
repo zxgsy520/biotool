@@ -10,16 +10,16 @@ import argparse
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __author__ = ("Xingguo Zhang",)
-__email__ = "113178210@qq.com"
+__email__ = "invicoun@foxmail.com"
 __all__ = []
 
 
 def read_bam(file):
 
     if file.endswith(".bam"):
-        fh = pysam.AlignmentFile(file, "rb", check_sq=False)
+        fh = pysam.AlignmentFile(file, "rb", check_sq=False, ignore_truncation=True)
     elif file.endswith(".sam"):
         fh = pysam.AlignmentFile(file, 'r')
     else:
