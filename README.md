@@ -9,9 +9,18 @@ Bioinformatics analysis tool
   * [numpy](https://numpy.org/doc/stable/index.html)
 ## Installation
 ```
-git clone https://github.com/rrwick/Unicycler.git
-cd Unicycler
+git clone https://github.com/zxgsy520/biotool.git
+cd  biotool/bin
+chmod 755 *
 ```
+or
+```
+wget -c https://github.com/zxgsy520/biotool/archive/refs/heads/main.zip
+unzip main.zip
 
-## Predict telomere
+```
+## Options and usage
+### Predict telomere
+```
 python find_telomeres.py genome.fasta >telomere.txt
+```
