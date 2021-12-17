@@ -47,4 +47,5 @@ command:
 ### Predict telomere  #预测端粒
 ```
 python find_telomeres.py genome.fasta >telomere.txt
+./find_telomeres genome.fasta >telomere.txt  #如果是linux系统
 ```
