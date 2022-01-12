@@ -10,7 +10,7 @@ import argparse
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "1.1.0"
+__version__ = "1.2.2"
 __author__ = ("Xingguo Zhang",)
 __email__ = "invicoun@foxmail.com"
 __all__ = []
@@ -143,7 +143,7 @@ def read_fastq(file):
     fp.close()
 
 
-def run_sort_genome(file):
+def run_sort_genome(file, minlen=500):
 
     r = {}
     ds = {}
@@ -151,24 +151,69 @@ def run_sort_genome(file):
 
     for seqid, seq in read_fasta(file):
         n += 1
+        if len(seq) <= minlen:
+            continue
         r[seqid] = seq
         ds[seqid] = len(seq)
 
     sn = 0
     cn = 0
-    tig_format = "contig{:0>%s}" % len(str(n))
-    scaf_format = "scaffold{:0>%s}" % len(str(n))
+    #tig_format = "contig{:0>%s}" % len(str(n))
+    #scaf_format = "scaffold{:0>%s}" % len(str(n))
+    tig_format = "tig{:0>%s}" % len(str(n))
+    scaf_format = "scf{:0>%s}" % len(str(n))
     for seqid, seqlen in sorted(ds.items(), key = lambda x:x[1], reverse=True):
         seq = r[seqid]
         if "N" in seq:
-            cn += 1
-            seqid = tig_format.format(cn)
-        else:
             sn += 1
             seqid = scaf_format.format(sn)
+        else:
+            cn += 1
+            seqid = tig_format.format(cn)
         print('>%s\n%s' % (seqid, seq))
 
     return 0
+
+
+def run_look_alnfa(file, ref=""):
+
+    r = {}
+    ids = []
+    for seqid, seq in read_fasta(file):
+        seqid = seqid.split()[0]
+        r[seqid] = seq
+        if seqid == ref:
+            continue
+        ids.append(seqid)
+
+    if ref not in r:
+        raise Exception("Reference sequence %s does not exist" % ref)
+    head = "Position\t%s" % ref
+    for i in ids:
+        head += "\t%s\tSame" % i
+    print(head)
+
+    n = 0
+    for i in r[ref]:
+        n += 1
+        temp = [str(n), i]
+        for j in ids:
+            base = r[j][n-1]
+            jb = "N"
+            if base == i:
+                jb = "."
+            temp += [base, jb]
+        print("\t".join(temp))
+
+    return 0
+
+
+def look_alnfa(args):
+
+    run_look_alnfa(args.align, args.ref)
+
+    return 0
+
 
 
 def run_fq2fa(files, minlen):
@@ -238,13 +283,15 @@ def add_sort_genome_args(parser):
 
     parser.add_argument('genome',
         help='Input genome file.')
+    parser.add_argument('--minlen', metavar='INT', type=int, default=500,
+        help='Set the shortest sequence length for filtering, default=500')
 
     return parser
 
 
 def sort_genome(args):
 
-    run_sort_genome(args.genome)
+    run_sort_genome(args.genome, args.minlen)
 
     return 0
 
@@ -283,6 +330,16 @@ def add_seqsplit_args(parser):
     return parser
 
 
+def add_look_alnfa_args(parser):
+
+    parser.add_argument('align', metavar='FILE', type=str,
+        help='Input the aligned multi-sequence file(fasta).')
+    parser.add_argument("-r", '--ref', metavar='STR', type=str, required=True,
+        help='Input the id of the reference sequence')
+
+    return parser
+
+
 def seqsplit(args):
 
     run_seqsplit(file=args.input,
@@ -316,6 +373,11 @@ def add_biotool_parser(parser):
         help="Sort and rename the genome.")
     sort_genome_parser = add_sort_genome_args(sort_genome_parser)
     sort_genome_parser.set_defaults(func=sort_genome)
+
+    look_alnfa_parser = subparsers.add_parser('look_alnfa',
+        help="View multiple sequence alignment files.")
+    look_alnfa_parser = add_look_alnfa_args(look_alnfa_parser)
+    look_alnfa_parser.set_defaults(func=look_alnfa)
 
     return parser
 
