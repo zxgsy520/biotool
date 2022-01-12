@@ -23,25 +23,26 @@ unzip main.zip
 ## Use biotool
 ```
 ./biotool -h
-usage: biotool [-h] {fq2fa,seqsplit,sort_genome} ...
+usage: biotool [-h] {fq2fa,seqsplit,sort_genome,look_alnfa} ...
 
 name:
 biotool：Commonly used processing tools for biological information
 
 URL：https://github.com/zxgsy520/biotool
 
-version: 1.1.0
+version: 1.2.2
 contact:  Xingguo Zhang <invicoun@foxmail.com>        
 
 optional arguments:
   -h, --help            show this help message and exit
 
 command:
-  {fq2fa,seqsplit,sort_genome}
-    fq2fa               fastq to fasta    #将fastq文件转化为fasta文件
-    seqsplit            Split files by a specific size.  #对fasta或者fastq文件按大小进行拆分
-    sort_genome         Sort and rename the genome.   #对基因组进行排序，将序列转化为大写，并且根据排序结果重新命名
-
+  {fq2fa,seqsplit,sort_genome,look_alnfa}
+    fq2fa               fastq to fasta #将fastq文件转化为fasta文件
+    seqsplit            Split files by a specific size. #对fasta或者fastq文件按大小进行拆分
+    sort_genome         Sort and rename the genome. #对基因组进行排序，将序列转化为大写，并且根据排序结果重新命名
+    look_alnfa          View multiple sequence alignment files. #将多序列比对后的文件用Excel表示，标记出差异的位置
+ 
 ```
 
 ### Predict telomere  #预测端粒
