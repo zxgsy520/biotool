@@ -10,7 +10,7 @@ import argparse
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "1.2.2"
+__version__ = "1.2.3"
 __author__ = ("Xingguo Zhang",)
 __email__ = "invicoun@foxmail.com"
 __all__ = []
@@ -82,12 +82,24 @@ def cut_seq(seq, binlen="50kb"):
         yield [seqid, seq[start:end]]
 
 
+def n50(lengths):
+
+    sum_length = sum(lengths)
+    accu_length = 0
+
+    for i in sorted(lengths, reverse=True):
+        accu_length += i
+
+        if accu_length >= sum_length*0.5:
+            return i
+
+
 def read_fasta(file):
 
     '''Read fasta file'''
     if file.endswith(".gz"):
         fp = gzip.open(file)
-    elif file.endswith(".fasta") or file.endswith(".fa"):
+    elif file.endswith(".fasta") or file.endswith(".fa") or file.endswith(".faa"):
         fp = open(file)
     else:
         raise Exception("%r file format error" % file)
@@ -143,8 +155,82 @@ def read_fastq(file):
     fp.close()
 
 
-def run_sort_genome(file, minlen=500):
+########-------------statistical sequence---------------------------------#####
+def stat_seqlen(file):
 
+    lengths = []
+
+    if file.endswith("fastq.gz") or file.endswith(".fq.gz") or file.endswith(".fastq") or file.endswith(".fq"):
+        fp = read_fastq(file)
+    else:
+        fp = read_fasta(file)
+
+    for line in fp:
+        lengths.append(len(line[1]))
+
+    return lengths
+
+
+def stat_seqs(args):
+
+    files = args.input
+    print("#Sample\tTotal_length\tSeq_number\tMax_length\tSeq_N50\tAvg_length\tMin_length")
+
+    for file in files:
+
+        prefix = get_prefix(file)
+        lengths = stat_seqlen(file)
+
+        print("{0}\t{1:,}\t{2:,}\t{3:,}\t{4:,}\t{5:,.2f}\t{6:,}".format(prefix,
+            sum(lengths), len(lengths), max(lengths), n50(lengths),
+            sum(lengths)*1.0/len(lengths), min(lengths))
+        )
+
+    return 0
+
+
+def add_stat_seqs_args(parser):
+
+    parser.add_argument("input", nargs="+", metavar="FILE", type=str,
+        help="Input sequence.")
+
+    return parser
+#######-----------------------------------------------------------------######
+
+
+########-------------fastq to fasta-------------------------------#####
+def fq2fa(args):
+    '''Convert fastq files to fasta files'''
+
+    files = args.fastq
+    minlen = args.minlen
+
+    for file in files:
+        for seqid, seq, ignore, quality in read_fastq(file):
+            if len(seq) < minlen:
+                LOG.info("The length of the filter sequence %s is %s" % (seqid, len(seq)))
+                continue
+            print('>%s\n%s' % (seqid, seq))
+
+    return 0
+
+
+def add_fq2fa_args(parser):
+
+    parser.add_argument("fastq", nargs="+", metavar="FILE", type=str,
+        help="Input fastq file.")
+    parser.add_argument("--minlen", metavar="INT", type=int, default=0,
+        help="Set the minimum length of sequence filtering, default=0")
+
+    return parser
+#######-----------------------------------------------------------------######
+
+
+########-------------Sort and rename genomes-------------------------------#####
+def sort_genome(args):
+
+    file = args.genome
+    minlen = args.minlen
     r = {}
     ds = {}
     n = 0
@@ -175,60 +261,18 @@ def run_sort_genome(file, minlen=500):
     return 0
 
 
-def run_look_alnfa(file, ref=""):
+def add_sort_genome_args(parser):
 
-    r = {}
-    ids = []
-    for seqid, seq in read_fasta(file):
-        seqid = seqid.split()[0]
-        r[seqid] = seq
-        if seqid == ref:
-            continue
-        ids.append(seqid)
+    parser.add_argument("genome",
+        help="Input genome file.")
+    parser.add_argument("--minlen", metavar="INT", type=int, default=500,
+        help="Set the shortest sequence length for filtering, default=500")
 
-    if ref not in r:
-        raise Exception("Reference sequence %s does not exist" % ref)
-    head = "Position\t%s" % ref
-    for i in ids:
-        head += "\t%s\tSame" % i
-    print(head)
-
-    n = 0
-    for i in r[ref]:
-        n += 1
-        temp = [str(n), i]
-        for j in ids:
-            base = r[j][n-1]
-            jb = "N"
-            if base == i:
-                jb = "."
-            temp += [base, jb]
-        print("\t".join(temp))
-
-    return 0
+    return parser
+#######-----------------------------------------------------------------######
 
 
-def look_alnfa(args):
-
-    run_look_alnfa(args.align, args.ref)
-
-    return 0
-
-
-
-def run_fq2fa(files, minlen):
-    '''Convert fastq files to fasta files'''
-
-    for file in files:
-        for seqid, seq, ignore, quality in read_fastq(file):
-            if len(seq) < minlen:
-                LOG.info("The length of the filter sequence %s is %s" % (seqid, len(seq)))
-                continue
-            print('>%s\n%s' % (seqid, seq))
-
-    return 0
-
-
+########------------Split files by a specific size-----------------------#####
 def cut_seqs(file, binlen, cut):
 
     if file.endswith(".fasta") or file.endswith(".fa") or file.endswith(".fasta.gz") or file.endswith(".fa.gz"):
@@ -279,39 +323,6 @@ def run_seqsplit(file, workdir, prefix, size, binlen, cut):
     fo.close()
 
 
-def add_sort_genome_args(parser):
-
-    parser.add_argument('genome',
-        help='Input genome file.')
-    parser.add_argument('--minlen', metavar='INT', type=int, default=500,
-        help='Set the shortest sequence length for filtering, default=500')
-
-    return parser
-
-
-def sort_genome(args):
-
-    run_sort_genome(args.genome, args.minlen)
-
-    return 0
-
-
-def add_fq2fa_args(parser):
-
-    parser.add_argument('fastq', nargs='+', metavar='FILE', type=str,
-        help='Input fastq file.')
-    parser.add_argument('--minlen', metavar='INT', type=int, default=0,
-        help='Set the minimum length of sequence filtering, default=0')
-    return parser
-
-
-def fq2fa(args):
-
-    run_fq2fa(files=args.fastq, minlen=args.minlen)
-
-    return 0
-
-
 def add_seqsplit_args(parser):
 
     parser.add_argument('input', metavar='FILE', type=str,
@@ -330,16 +341,6 @@ def add_seqsplit_args(parser):
     return parser
 
 
-def add_look_alnfa_args(parser):
-
-    parser.add_argument('align', metavar='FILE', type=str,
-        help='Input the aligned multi-sequence file(fasta).')
-    parser.add_argument("-r", '--ref', metavar='STR', type=str, required=True,
-        help='Input the id of the reference sequence')
-
-    return parser
-
-
 def seqsplit(args):
 
     run_seqsplit(file=args.input,
@@ -351,6 +352,54 @@ def seqsplit(args):
     )
 
     return 0
+#######-----------------------------------------------------------------######
+
+
+########----------View multiple sequence alignment files-----------------#####
+def look_alnfa(args):
+
+    file = args.align
+    ref = args.ref
+    r = {}
+    ids = []
+    for seqid, seq in read_fasta(file):
+        seqid = seqid.split()[0]
+        r[seqid] = seq
+        if seqid == ref:
+            continue
+        ids.append(seqid)
+
+    if ref not in r:
+        raise Exception("Reference sequence %s does not exist" % ref)
+    head = "Position\t%s" % ref
+    for i in ids:
+        head += "\t%s\tSame" % i
+    print(head)
+
+    n = 0
+    for i in r[ref]:
+        n += 1
+        temp = [str(n), i]
+        for j in ids:
+            base = r[j][n-1]
+            jb = "N"
+            if base == i:
+                jb = "."
+            temp += [base, jb]
+        print("\t".join(temp))
+
+    return 0
+
+
+def add_look_alnfa_args(parser):
+
+    parser.add_argument("align", metavar="FILE", type=str,
+        help="Input the aligned multi-sequence file(fasta).")
+    parser.add_argument("-r", "--ref", metavar="STR", type=str, required=True,
+        help="Input the id of the reference sequence")
+
+    return parser
+#######-----------------------------------------------------------------######
 
 
 def add_biotool_parser(parser):
@@ -360,21 +409,25 @@ def add_biotool_parser(parser):
         dest='commands')
     subparsers.required = True
 
-    fq2fa_parser = subparsers.add_parser('fq2fa', help="fastq to fasta")
+    stats_parser = subparsers.add_parser("stats", help="simple statistics of FASTA/Q files")
+    stats_parser = add_stat_seqs_args(stats_parser)
+    stats_parser.set_defaults(func=stat_seqs)
+
+    fq2fa_parser = subparsers.add_parser("fq2fa", help="fastq to fasta")
     fq2fa_parser = add_fq2fa_args(fq2fa_parser)
     fq2fa_parser.set_defaults(func=fq2fa)
 
-    seqsplit_parser = subparsers.add_parser('seqsplit',
-        help="Split files by a specific size.")
-    seqsplit_parser = add_seqsplit_args(seqsplit_parser)
-    seqsplit_parser.set_defaults(func=seqsplit)
-
-    sort_genome_parser = subparsers.add_parser('sort_genome',
+    sort_genome_parser = subparsers.add_parser("sort_genome",
         help="Sort and rename the genome.")
     sort_genome_parser = add_sort_genome_args(sort_genome_parser)
     sort_genome_parser.set_defaults(func=sort_genome)
 
-    look_alnfa_parser = subparsers.add_parser('look_alnfa',
+    seqsplit_parser = subparsers.add_parser("seqsplit",
+        help="Split files by a specific size.")
+    seqsplit_parser = add_seqsplit_args(seqsplit_parser)
+    seqsplit_parser.set_defaults(func=seqsplit)
+
+    look_alnfa_parser = subparsers.add_parser("look_alnfa",
         help="View multiple sequence alignment files.")
     look_alnfa_parser = add_look_alnfa_args(look_alnfa_parser)
     look_alnfa_parser.set_defaults(func=look_alnfa)
@@ -389,7 +442,6 @@ def main():
         description="""
 name:
 biotool：Commonly used processing tools for biological information
-
 URL：https://github.com/zxgsy520/biotool
 
 version: %s
