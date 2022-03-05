@@ -19,7 +19,7 @@ wget -c https://github.com/zxgsy520/biotool/archive/refs/heads/main.zip
 unzip main.zip
 
 ```
-下载之后给执行权限就可以使用（目前支持者linux系统）
+下载之后给执行权限就可以使用（目前支持者linux系统），要在其他系统中使用可以直接运行脚本，但需要安装依赖。
 ## Options and usage
 ## Use biotool
 ```
