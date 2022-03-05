@@ -19,6 +19,7 @@ wget -c https://github.com/zxgsy520/biotool/archive/refs/heads/main.zip
 unzip main.zip
 
 ```
+下载之后给执行权限就可以使用（目前支持者linux系统）
 ## Options and usage
 ## Use biotool
 ```
