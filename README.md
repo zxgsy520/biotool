@@ -47,8 +47,14 @@ command:
  
 ```
 
-### Predict telomere  #预测端粒
+### Predict telomere（预测端粒）
 ```
-python find_telomeres.py genome.fasta >telomere.txt
+python find_telomeres.py genome.fasta >telomere.txt  #所有系统
 ./find_telomeres genome.fasta >telomere.txt  #如果是linux系统
+``` 
+### Batch close tasks（批量关闭任务）
+使用sge的服务器，批量杀死指定任务的插件。
 ```
+qdels -k evm_  #杀死说有“evm_”字符的任务
+qdels -k evm*A1
+``` 
