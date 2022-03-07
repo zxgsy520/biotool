@@ -56,5 +56,5 @@ python find_telomeres.py genome.fasta >telomere.txt  #所有系统
 使用sge的服务器，批量杀死指定任务的插件。
 ```
 qdels -k evm_  #杀死说有“evm_”字符的任务
-qdels -k evm*A1
+qdels -k evm*A1 #支持字符串中间的通配符
 ``` 
