@@ -26,7 +26,6 @@ def choose_task(line, key):
     taskid = ""
     task = line[2]
 
-
     for i in key:
         if i not in task:
             taskid = ""
@@ -38,7 +37,9 @@ def choose_task(line, key):
 
 def read_qstat(string=""):
 
-    if "*" in string.strip("*"):
+    if string == "all":
+        string = [""]
+    elif "*" in string.strip("*"):
         string = wildcard(string)
     else:
         string = [string]
@@ -56,7 +57,8 @@ def read_qstat(string=""):
         taskid = choose_task(line, string)
         if taskid:
             r.append(taskid)
-
+            LOG.info("kill task %s(%s)" % (line[2], taskid))
+    
     return r
 
 
@@ -64,6 +66,8 @@ def qdel_task(string):
 
     taxids = read_qstat(string)
 
+    if len(taxids) == 0:
+        LOG.info("There are no tasks to kill, please confirm the entered keywords.")
     for i in taxids:
         cmd = "qdel %s" % i
         result = os.popen(cmd)
@@ -73,7 +77,7 @@ def qdel_task(string):
 
 def add_help_args(parser):
 
-    parser.add_argument("-k", "--keyword", metavar="STR", type=str, default="",
+    parser.add_argument("-k", "--keyword", metavar="STR", type=str, default="ZXG",
         help="Input the keyword for the task (wildcards are supported).")
 
     return parser
@@ -90,12 +94,13 @@ def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="""
+URL：https://github.com/zxgsy520/biotool
 name:
     qdels.py: Batch clean up specified tasks.
 
 attention:
     qdels.py -k evm_*
-    qdels.py
+    qdels.py -k all    #kill all task
 
 version: %s
 contact:  %s <%s>\
