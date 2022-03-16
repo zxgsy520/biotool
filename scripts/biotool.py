@@ -10,7 +10,7 @@ import argparse
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 __author__ = ("Xingguo Zhang",)
 __email__ = "invicoun@foxmail.com"
 __all__ = []
@@ -226,6 +226,37 @@ def add_fq2fa_args(parser):
 #######-----------------------------------------------------------------######
 
 
+
+########-------------fasta to fastq-------------------------------#####
+def create_repeat(string, number=1):
+
+    r = ""
+
+    for i in range(number):
+        r += string
+
+    return r
+
+
+def fa2fq(args):
+    '''Convert fasta files to fastq files'''
+
+    for seqid, seq in read_fasta(args.fasta):
+        quality = create_repeat("F", len(seq))
+        print("@%s\n%s\n+\n%s" % (seqid, seq, quality))
+
+    return 0
+
+
+def add_fa2fq_args(parser):
+
+    parser.add_argument("fasta",  metavar="FILE", type=str,
+        help="Input fasta file.")
+
+    return parser
+#######-----------------------------------------------------------------######
+
+
 ########-------------Sort and rename genomes-------------------------------#####
 def sort_genome(args):
 
@@ -416,6 +447,10 @@ def add_biotool_parser(parser):
     fq2fa_parser = subparsers.add_parser("fq2fa", help="fastq to fasta")
     fq2fa_parser = add_fq2fa_args(fq2fa_parser)
     fq2fa_parser.set_defaults(func=fq2fa)
+
+    fa2fq_parser = subparsers.add_parser("fa2fq", help="fasta to fastq")
+    fa2fq_parser = add_fa2fq_args(fa2fq_parser)
+    fa2fq_parser.set_defaults(func=fa2fq)
 
     sort_genome_parser = subparsers.add_parser("sort_genome",
         help="Sort and rename the genome.")
