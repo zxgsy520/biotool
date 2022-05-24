@@ -4,3 +4,4 @@
 |----|----|----|----|----|
 |platon|质粒预测|[https://github.com/oschwengers/platon](https://github.com/oschwengers/platon)|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7660248/||
 |sortmerna|从宏转录组数据中过滤 rRNA|https://github.com/biocore/sortmerna|https://pubmed.ncbi.nlm.nih.gov/23071270/||
+|AGORA|根据近源物种注释线粒体|https://bigdata.dongguk.edu/gene_project/AGORA/|https://pubmed.ncbi.nlm.nih.gov/29617954/||
