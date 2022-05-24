@@ -20,4 +20,4 @@
 |mob_suite|从细菌草图中获取质粒|https://github.com/phac-nml/mob-suite|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7660255/||
 |proovread|使用二代数据或者基因组数据矫正三代数据|https://github.com/BioInf-Wuerzburg/proovread|https://academic.oup.com/bioinformatics/article/30/21/3004/2422147||
 |SortMeRNA|从宏基因组数据中过滤rRNA序列|https://github.com/biocore/sortmerna||
-|PGA|叶绿体基因组注释|https://github.com/quxiaojian/PGA|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6528300/|
+|PGA|叶绿体基因组注释|https://github.com/quxiaojian/PGA|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6528300/||
