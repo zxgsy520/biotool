@@ -8,4 +8,7 @@
 |MitoZ|根据近源物种注释动物线粒体|https://github.com/linzhi2013/MitoZ|https://pubmed.ncbi.nlm.nih.gov/30864657/|部分物种效果不理想|
 |mitos2|动物线粒体注释|http://mitos2.bioinf.uni-leipzig.de/index.py||注释动物线粒体还可以|
 |pLannotate|工程质粒注释软件|http://plannotate.barricklab.org/|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8262757/|在线|
+|MEANGS|动物线粒体组装软件|https://github.com/YanCCscu/meangs|https://pubmed.ncbi.nlm.nih.gov/34941991/|通过测试组装效果很差，组装时间很长，没有我开发的好|
+|MitoFlex|动物线粒体组装|https://github.com/Prunoideae/MitoFlex|https://pubmed.ncbi.nlm.nih.gov/33605414/|未测试，底层使用megahit组装，可能适合从宏基因组中组装出线粒体|
+
 
