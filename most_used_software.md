@@ -16,5 +16,7 @@
 |badread|三代数据模拟软件|https://github.com/rrwick/Badread|||
 |BMTagger|区分人类基因和微生物序列的软件|https://www.westgrid.ca/support/software/bmtagger|||
 |ChewBBACA|核心基因分析软件|https://github.com/B-UMMI/chewBBACA|https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000166||
+|dram|宏病毒注释软件|https://github.com/WrightonLabCSU/DRAM|https://academic.oup.com/nar/article/48/16/8883/5884738||
+|mob_suite|从细菌草图中获取质粒|https://github.com/phac-nml/mob-suite|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7660255/||
 
 
