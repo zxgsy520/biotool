@@ -12,5 +12,9 @@
 |pLannotate|工程质粒注释软件|http://plannotate.barricklab.org/|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8262757/|在线|
 |MEANGS|动物线粒体组装软件|https://github.com/YanCCscu/meangs|https://pubmed.ncbi.nlm.nih.gov/34941991/|通过测试组装效果很差，组装时间很长，没有我开发的好|
 |MitoFlex|动物线粒体组装|https://github.com/Prunoideae/MitoFlex|https://pubmed.ncbi.nlm.nih.gov/33605414/|未测试，底层使用megahit组装，可能适合从宏基因组中组装出线粒体|
+|GetOrganelle|组装线粒体、叶绿体和ITs|https://github.com/Kinggerm/GetOrganelle|https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02153-6|有的物种组装的可以，有的组装的不好|
+|badread|三代数据模拟软件|https://github.com/rrwick/Badread|||
+|BMTagger|区分人类基因和微生物序列的软件|https://www.westgrid.ca/support/software/bmtagger|||
+|ChewBBACA|核心基因分析软件|https://github.com/B-UMMI/chewBBACA|https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000166||
 
 
