@@ -24,3 +24,4 @@
 |CPGAVAS2|质体注释软件| http://47.96.249.172:16019/analyzer/updateAnno|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6602467/||
 |MitoFinder|动物线粒体组装注释|https://github.com/RemiAllio/MitoFinder|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7497042/||
 |Easyfig|基因组可视化工具|https://github.com/mjsull/Easyfig|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3065679/|小基因组的共线性比价分析|
+|STAMP|分析分类或代谢概况的软件包|https://github.com/dparks1134/STAMP|||
