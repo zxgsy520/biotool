@@ -44,6 +44,7 @@ command:
     fa2fq               fasta to fastq #将fasta文件转化为fastq文件(质量值是假的，为了方便一些软件只支持fastq格式输入)
     seqsplit            Split files by a specific size. #对fasta或者fastq文件按大小进行拆分
     sort_genome         Sort and rename the genome. #对基因组进行排序，将序列转化为大写，并且根据排序结果重新命名
+    greps               Extract specific lines of files based on keywords. #提供一个关键词的列表，通过关键词提取文件对应的行。
     look_alnfa          View multiple sequence alignment files. #将多序列比对后的文件用Excel表示，标记出差异的位置
  
 ```
