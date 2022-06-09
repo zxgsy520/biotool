@@ -39,13 +39,16 @@ optional arguments:
 
 command:
   {fq2fa,seqsplit,sort_genome,look_alnfa}
-    stats               simple statistics of FASTA/Q files #对序列进行统计（fasta, fastq, fasta.gz, fastq.gz）
-    fq2fa               fastq to fasta #将fastq文件转化为fasta文件
-    fa2fq               fasta to fastq #将fasta文件转化为fastq文件(质量值是假的，为了方便一些软件只支持fastq格式输入)
-    seqsplit            Split files by a specific size. #对fasta或者fastq文件按大小进行拆分
-    sort_genome         Sort and rename the genome. #对基因组进行排序，将序列转化为大写，并且根据排序结果重新命名
+    stats               simple statistics of FASTA/Q files #对序列进行统计（fasta, fastq, fasta.gz, fastq.gz）。
+    fq2fa               fastq to fasta #将fastq文件转化为fasta文件。
+    fa2fq               fasta to fastq #将fasta文件转化为fastq文件(质量值是假的，为了方便一些软件只支持fastq格式输入)。
+    seqsplit            Split files by a specific size. #对fasta或者fastq文件按大小进行拆分。
+    sort_genome         Sort and rename the genome. #对基因组进行排序，将序列转化为大写，并且根据排序结果重新命名。
     greps               Extract specific lines of files based on keywords. #提供一个关键词的列表，通过关键词提取文件对应的行。
-    look_alnfa          View multiple sequence alignment files. #将多序列比对后的文件用Excel表示，标记出差异的位置
+    cat                 Combine compressed and uncompressed files and strip empty lines. #合并普通文件和压缩文件，并将里面的空行去掉。
+    makemd5             Generate MD5 values for files in the folder one by one. #对文件生产MD5验证码（如果是文件夹，就对文件夹里面的每一个文件都生产MD5验证码）。
+    qdels               Kill tasks delivered by qsub based on keywords.  #根据关键词批量杀死qsub投的任务。
+    look_alnfa          View multiple sequence alignment files. #将多序列比对后的文件用Excel表示，标记出差异的位置。
  
 ```
 
@@ -57,6 +60,6 @@ python find_telomeres.py genome.fasta >telomere.txt  #所有系统
 ### Batch close tasks（批量关闭任务）
 使用sge的服务器，批量杀死指定任务的插件。
 ```
-qdels -k evm_  #杀死说有“evm_”字符的任务
-qdels -k evm*A1 #支持字符串中间的通配符
+biotool qdels -k evm_  #杀死说有“evm_”字符的任务
+biotool qdels -k evm*A1 #支持字符串中间的通配符
 ``` 
