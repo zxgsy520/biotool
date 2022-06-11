@@ -1,0 +1,30 @@
+#qseqid	sseqid	name	desc	qstart	qend	startend	coverage	identity
+GC82.tig14901.2	NP_270109	hasC	(hasC) UDP-glucose pyrophosphorylase [Hyaluronic acid capsule (VF0244)] [Streptococcus pyogenes M1 GAS]	13	852	7-846/915	91.58	77.55
+GC82.tig18754.2	NP_757239	fimB	(fimB) Type 1 fimbriae Regulatory protein fimB [Type 1 fimbriae (VF0221)] [Escherichia coli CFT073]	1	603	1-603/603	100.00	98.18
+GC82.tig19562.2	NP_286011	ykgK/ecpR	(ykgK/ecpR) regulator protein EcpR [ECP (VF0404)] [Escherichia coli O157:H7 str. EDL933]	1	591	1-591/591	100.00	99.32
+GC82.tig20466.2	YP_001006774	cheY	(cheY) chemotaxis regulatory protein CheY [peritrichous flagella (AI145)] [Yersinia enterocolitica subsp. enterocolitica 8081]	1	388	1-388/390	99.49	76.55
+GC82.tig23236.2	AAG10151	aslA	(aslA) putative arylsulfatase [AslA (VF0238)] [Escherichia coli O18:K1:H7 str. RS218]	1	753	505-1257/1428	52.73	97.74
+GC82.tig24232.2	NP_757243	fimC	(fimC) Chaperone protein fimC precursor [Type 1 fimbriae (VF0221)] [Escherichia coli CFT073]	1	726	1-726/726	100.00	98.90
+GC82.tig24301.1	NP_755468	papI	(papI) regulatory protein PapI [P fimbriae (VF0220)] [Escherichia coli CFT073]	1	221	1-221/234	94.44	98.64
+GC82.tig24301.3		papB	(papB) regulatory protein PapB [P fimbriae (VF0220)] [Escherichia coli CFT073]	1	313	1-313/315	99.37	99.04
+GC82.tig29311.1	NP_752599	entD	(entD) phosphopantetheinyl transferase component of enterobactin synthase multienzyme complex [Enterobactin (VF0228)] [Escherichia coli CFT073]	1	630	142-771/771	81.71	93.33
+GC82.tig33393.2	NP_755464	papD	(papD) chaperone protein PapD [P fimbriae (VF0220)] [Escherichia coli CFT073]	130	735	1-606/606	100.00	99.34
+GC82.tig33687.2	YP_404603	gspG	(gspG) general secretion pathway protein G [T2SS (VF0333)] [Shigella dysenteriae Sd197]	1	432	10-441/456	94.74	97.92
+GC82.tig39781.2	NP_757241	fimA	(fimA) Type-1 fimbrial protein A chain precursor [Type 1 fimbriae (VF0221)] [Escherichia coli CFT073]	1	453	154-606/606	74.75	88.52
+GC82.tig42010.2	NP_755459	papF	(papF) P pilus minor subunit PapF  [P fimbriae (VF0220)] [Escherichia coli CFT073]	1	531	1-531/531	100.00	98.68
+GC82.tig45219.2	NP_286009	yagY/ecpB	(yagY/ecpB) E. coli common pilus chaperone EcpB [ECP (VF0404)] [Escherichia coli O157:H7 str. EDL933]	49	717	1-669/669	100.00	97.76
+GC82.tig49498.2	NP_757247	fimG	(fimG) FimG protein precursor [Type 1 fimbriae (VF0221)] [Escherichia coli CFT073]	7	510	1-504/504	100.00	98.21
+GC82.tig69339.1	NP_755460	papE	(papE) P pilus minor subunit PapE [P fimbriae (VF0220)] [Escherichia coli CFT073]	1	399	19-417/540	73.89	94.99
+GC82.tig88007.1	NP_460111	csgF	(csgF) curli production assembly/transport protein CsgF [Agf (VF0103)] [Salmonella enterica subsp. enterica serovar Typhimurium str. LT2]	1	245	1-245/417	57.79	82.73
+GC83.tig000180.101	AAN12397	acm	(acm) collagen adhesin precursor Acm [Acm (VF0419)] [Enterococcus faecium str. TX2555]	1	1415	451-1865/2166	65.33	96.82
+GC83.tig000446.3	NP_814691	bopD	(bopD) sugar-binding transcriptional regulator LacI family [BopD (VF0362)] [Enterococcus faecalis V583]	1	971	1-971/1011	96.04	75.90
+GC83.tig000539.4	ZP_00602747	sgrA	(sgrA) cell wall anchored protein SgrA [SgrA (VF0540)] [Enterococcus faecium DO]	10	957	1-975/975	97.23	92.31
+GC83.tig000594.31	NP_290672	espX4	(espX4) Type III secretion system effector EspX4 [LEE encoded T3SS (SS020)] [Escherichia coli O157:H7 str. EDL933]	1	1581	1-1581/1581	100.00	96.46
+GC83.tig000657.37	YP_001006770	flhA	(flhA) flagellar biosynthesis protein FlhA [Flagella (VF0394)] [Yersinia enterocolitica subsp. enterocolitica 8081]	6	2069	6-2069/2079	99.04	75.16
+GC83.tig000719.27	YP_001006758	flgH	(flgH) flagellar L-ring protein precursor FlgH [Flagella (VF0394)] [Yersinia enterocolitica subsp. enterocolitica 8081]	151	702	127-678/684	80.70	79.17
+GC83.tig000719.28	YP_001006759	flgG	(flgG) flagellar basal-body rod protein FlgG [Flagella (VF0394)] [Yersinia enterocolitica subsp. enterocolitica 8081]	136	783	7-654/654	98.62	75.58
+GC83.tig000719.35	YP_001006766	flgM	(flgM) negative regulator of flagellin synthesis [Flagella (VF0394)] [Yersinia enterocolitica subsp. enterocolitica 8081]	127	263	91-227/258	53.10	81.02
+GC83.tig001049.17	NP_288154	espL1	(espL1) Type III secretion system effector espL1 [LEE encoded T3SS (SS020)] [Escherichia coli O157:H7 str. EDL933]	3	1416	486-1899/1899	74.46	97.59
+GC83.tig001129.19	NP_465991	clpP	(clpP) ATP-dependent Clp protease proteolytic subunit [ClpP (VF0074)] [Listeria monocytogenes EGD-e]	1	563	1-563/597	94.14	75.36
+GC83.tig001189.9	NP_290699	espX5	(espX5) Type III secretion system effector EspX5 [LEE encoded T3SS (SS020)] [Escherichia coli O157:H7 str. EDL933]	1	1293	1-1293/1293	100.00	96.52
+GC83.tig001616.13	YP_001006744	fliI	(fliI) flagellum-specific ATP synthase FliI [Flagella (VF0394)] [Yersinia enterocolitica subsp. enterocolitica 8081]	76	1317	43-1281/1332	92.79	76.06
