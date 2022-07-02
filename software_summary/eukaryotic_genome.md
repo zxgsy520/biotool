@@ -6,3 +6,4 @@
 |----|----|----|----|----|
 |minidot|基因组比较共线性图软件|[https://github.com/thackl/minidot](https://github.com/thackl/minidot)|||
 |tapestry|三代小虫子的组装软件|[https://github.com/johnomics/tapestry](https://github.com/johnomics/tapestry)|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8022732/||
+|haslr|二三代混合组装软件|[https://github.com/vpc-ccg/haslr](https://github.com/vpc-ccg/haslr)|https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7419660/|可以在中小型动植物中测试使用|
