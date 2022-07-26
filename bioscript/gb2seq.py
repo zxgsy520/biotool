@@ -10,13 +10,13 @@ from Bio import SeqIO
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "v1.2.0"
+__version__ = "v1.2.1"
 __author__ = ("Xingguo Zhang",)
 __email__ = "invicoun@foxmail.com"
 __all__ = []
 
 
-def gb2seq(file, types):
+def gb2seq(file, types, table):
     """
     Read the genbank file.
     Export gene sequences,
@@ -28,6 +28,11 @@ def gb2seq(file, types):
         fh = gzip.open(file)
     else:
         fh = open(file)
+
+    temp = ""
+    if types == "pep":
+        temp = "pep"
+        types = "CDS"
 
     for record in SeqIO.parse(fh, "genbank"):
         for gene_dict in record.features:
@@ -41,16 +46,21 @@ def gb2seq(file, types):
                 note = gene_dict.qualifiers["note"][0]
 
             gene = str(gene_dict.qualifiers["gene"][0])
+            if temp:
+                if "translation" in gene_dict.qualifiers:
+                    seq = str(gene_dict.qualifiers["translation"][0])
+                else:
+                    seq = str(seq.translate(table=table))
 
             print(">%s %s\n%s" % (gene, note, seq))
 
     return 0
 
 
-def gb2seqs(files, types="CDS"):
-    
+def gb2seqs(files, types="CDS", table=11):
+
     for file in files:
-        gb2seq(file, types)
+        gb2seq(file, types, table)
 
     return 0
 
@@ -59,8 +69,11 @@ def add_help_args(parser):
 
     parser.add_argument("genbank", metavar="FILE", type=str, nargs='+',
         help="Input genebank file containing protein sequence.")
-    parser.add_argument("-ts", "--types", choices=["CDS", "rRNA", "tRNA", "gene"], default="CDS",
-        help='Input sequence type(CDS, rRNA, rRNA, gene), default=CDS.')
+    parser.add_argument("-tp", "--types", metavar="STR", type=str, default="CDS",
+        choices=["CDS", "rRNA", "tRNA", "gene", "pep"],
+        help="Input sequence type(CDS, rRNA, tRNA, gene, pep), default=CDS")
+    parser.add_argument("-t", "--table", metavar="INT", type=int, default=11,
+        help="Input codon table used, default=11")
 
     return parser
 
@@ -80,7 +93,7 @@ name:
      gb2seqs.py Get sequences from genebank files.
 
 attention:
-     gb2seqs.py genomic.gb -t CDS > CDS.fa
+     gb2seqs.py genomic.gb -tp CDS > CDS.fa
 
 version: %s
 contact:  %s <%s>\
@@ -88,7 +101,7 @@ contact:  %s <%s>\
 
     args = add_help_args(parser).parse_args()
 
-    gb2seqs(args.genbank, args.types)
+    gb2seqs(args.genbank, args.types, args.table)
 
 
 if __name__ == "__main__":
