@@ -6,3 +6,4 @@
 |----|----|----|----|----|
 |PhaGCN|病毒快速分类|[https://github.com/KennthShang/PhaGCN2.0](https://github.com/KennthShang/PhaGCN2.0)|https://www.researchsquare.com/article/rs-1658089/v1|软件不能多线程，且只能在安装路径下运行，注释不到种属|
 |vpf-tools|病毒分类注释|[https://github.com/biocom-uib/vpf-tools](https://github.com/biocom-uib/vpf-tools)|https://pubmed.ncbi.nlm.nih.gov/33471063/|软件不好安装，需要管理员权限|
+|vRhyme|病毒分箱|[https://github.com/AnantharamanLab/vRhyme](https://github.com/AnantharamanLab/vRhyme)|https://pubmed.ncbi.nlm.nih.gov/35544285/|-|
