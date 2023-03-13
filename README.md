@@ -60,7 +60,7 @@ command:
 
 ### Predict telomere（预测端粒）
 ```
-./biotool.py find_telomere genome.fasta >telomere.txt  #所有系统
+./biotool.pyc find_telomere genome.fasta >telomere.txt  #所有系统
 ././biotool find_telomere genome.fasta >telomere.txt  #如果是linux系统
 ``` 
 ### Batch close tasks（批量关闭任务）
